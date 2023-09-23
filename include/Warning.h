@@ -26,14 +26,14 @@ class IndexWarning : public Warning
 		int min, max;
 		double val;
 	public:
-		IndexWarning(int min, int max, double val);
+		IndexWarning(int Min, int Max, double Val);
 };
 class EdgeCaseWarning : public Warning
 {
 	private:
 		double min, max, val;
 	public:
-		EdgeCaseWarning(double min, double max, double val);
+		EdgeCaseWarning(double Min, double Max, double Val);
 };
 class ProbabilityWarning : public Warning
 {
@@ -45,7 +45,7 @@ class MaxCountWarning : public Warning
 	private:
 		int count;
 	public:
-		MaxCountWarning(int count);
+		MaxCountWarning(int Count);
 };
 
 #endif

@@ -4,6 +4,8 @@ from matplotlib.ticker import (MultipleLocator, FormatStrFormatter, LogLocator)
 
 colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
 
+LOWER_LIM = 1e-13
+
 fname = "data/Speed.txt"
 dataf = open(fname, "r")
 data = {}
@@ -16,21 +18,21 @@ for line in dataf.readlines():
 	prec = float(line[2])
 	data[line[0]] = [speed, prec]
 	speeds.append(speed)
-	if prec > 1e-12:
+	if prec > LOWER_LIM:
 		precs.append(prec)
 dataf.close()
 
-names = np.array(data.keys())
+names = np.array(list(data.keys()))
 
 # group in different categories
 # exact measurements have arrows pointing down for precision
-exacts = ["ZS", "Diag", "OS", "Exp"]
+exacts = ["ZS", "Diag", "JP"]
 exact_mask = np.array([name in exacts for name in names])
 exact_speeds = np.array([data[name][0] for name in names[exact_mask]])
 exact_precs = np.array([data[name][1] for name in names[exact_mask]])
 
 # these expressions are at least 1% precise
-precises = [r"DMP^0", r"DMP^1", "MP", r"AM^2", r"AM^{5/2}", "MF", "AKT", r"DPZ^0", r"DPZ^2"]
+precises = [r"DMP^0", r"DMP^1", "MP", r"AM^2", r"AM^{5/2}", "MF", "AKT", r"DPZ^0", r"DPZ^2", "OS", "Exp"]
 precise_mask = np.array([name in precises for name in names])
 precise_speeds = np.array([data[name][0] for name in names[precise_mask]])
 precise_precs = np.array([data[name][1] for name in names[precise_mask]])
@@ -61,7 +63,7 @@ plt.ylabel(r"$|\Delta P|/P$")
 v = list(plt.axis())
 v[0] = 2e-2
 v[1] = 1e-0
-v[2] = 1e-12
+v[2] = LOWER_LIM
 v[3] = 1e-2
 plt.axis(v)
 
@@ -127,5 +129,6 @@ plt.annotate(r"", xy = (1 - dx1, 1 - dx1), xycoords = "axes fraction", xytext = 
 # version number
 plt.text(0.10, 0.01, r"${\rm Nu}$-${\rm Pert}$-${\rm Compare\ v1.2}$", ha = "left", va = "bottom", transform = plt.gca().transAxes, color = "gray", fontsize = 10)
 # save the figure
-plt.savefig("fig/Speed.pdf")
+# plt.savefig("fig/Speed.pdf")
+plt.show()
 

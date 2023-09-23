@@ -25,6 +25,7 @@ enum expression : int
 	dpz2,
 	os,
 	Exp,
+	jp,
 	LAST_EXPRESSION
 };
 

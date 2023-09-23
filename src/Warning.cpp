@@ -21,8 +21,8 @@ Warning::~Warning()
 		and warn)
 		std::cerr << "Warning #" << Warning_number << ": " << name << ": " << message << std::endl;
 }
-IndexWarning::IndexWarning(int min, int max, double val)
-: min(min), max(max), val(val)
+IndexWarning::IndexWarning(int Min, int Max, double Val)
+: min(Min), max(Max), val(Val)
 {
 	name = "IndexWarning";
 	std::ostringstream tmp;
@@ -30,8 +30,8 @@ IndexWarning::IndexWarning(int min, int max, double val)
 	message = tmp.str();
 	N_IndexWarning++;
 }
-EdgeCaseWarning::EdgeCaseWarning(double min, double max, double val)
-: min(min), max(max), val(val)
+EdgeCaseWarning::EdgeCaseWarning(double Min, double Max, double Val)
+: min(Min), max(Max), val(Val)
 {
 	name = "EdgeCaseWarning";
 	std::ostringstream tmp;
@@ -56,8 +56,8 @@ ProbabilityWarning::ProbabilityWarning(double *P)
 		N_ProbabilityWarning++;
 	}
 }
-MaxCountWarning::MaxCountWarning(int count)
-: count(count)
+MaxCountWarning::MaxCountWarning(int Count)
+: count(Count)
 {
 	name = "MaxCountWarning";
 	std::ostringstream tmp;

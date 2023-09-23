@@ -16,7 +16,7 @@ data = np.loadtxt(fname, dtype = dt, skiprows = 1)
 # form several groups for several plots
 madrid = ["Madrid", "FL", "AJLOS(31)"]
 main = ["Madrid", r"DMP^0", r"DMP^1", r"AM^{5/2}", "AJLOS(48)", "AKT", r"DPZ^0"]
-exacts = ["Diag"]
+exacts = ["Diag", "JP"]
 ignores = ["ZS", "Zeroth", "Vacuum"]
 others = list(set(expressions) - set(madrid) - set(main) - set(exacts) - set(ignores))
 
@@ -27,7 +27,7 @@ def p(which):
 	if which == "exacts":	include = exacts
 
 	# set zorder and plot
-	for i in xrange(1, len(dts)):
+	for i in range(1, len(dts)):
 		d = dts[i]
 		if d not in include: continue
 		zo = 100 - i
@@ -55,13 +55,13 @@ def p(which):
 	# reasonable looking xticks
 	xticks = [0.3, 1., 10.]
 	xtick_labels = [r"$%.1f$" % xtick for xtick in xticks]
-	for i in xrange(len(xticks)):
+	for i in range(len(xticks)):
 		if xticks[i] >= 10.:
 			xtick_labels[i] = r"$%i$" % xticks[i]
 	plt.xticks(xticks, xtick_labels)
 
 	# lots of yticks
-	yticks = [10 ** i for i in xrange(int(np.ceil(np.log10(v[2]))), int(np.floor(np.log10(v[3]))) + 1)]
+	yticks = [10 ** i for i in range(int(np.ceil(np.log10(v[2]))), int(np.floor(np.log10(v[3]))) + 1)]
 	plt.yticks(yticks)
 
 	# label axes

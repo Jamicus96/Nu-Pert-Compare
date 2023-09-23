@@ -63,7 +63,7 @@ double Pmue(double a, double L, double E, int order)
 
 	// mu
 	sum_m = hee + c23sq * htt + s23sq * hmm - 2 * s23 * c23 * cd * hmt;
-	prod_m = hee * (c23sq * htt + s23sq * hmm - 2 * s23 * c23 * cd * hmt) - sq(fabs(c23 * het - s23 * conj(eid) * hem));
+	prod_m = hee * (c23sq * htt + s23sq * hmm - 2 * s23 * c23 * cd * hmt) - sq(std::abs(c23 * het - s23 * conj(eid) * hem));
 
 	// calculate relevant Uaisq
 	double Ue2sq, Ue3sq, Um3sq, Um2sq;

@@ -21,7 +21,7 @@ exclude = [r"AM^2", "AKS", "Diag", "AJLOS(31)", "MP", "MF", "FL", "Zeroth", "Vac
 f, (ax1, ax2) = plt.subplots(1, 2, sharey = True)
 f.subplots_adjust(wspace = 0)
 
-for i in xrange(1, len(dts)):
+for i in range(1, len(dts)):
 	d = dts[i]
 
 	# make the exact expression identifiable
@@ -54,7 +54,7 @@ v[3] = 0.10
 # reasonable looking xticks
 xticks = [1., 10.]
 xtick_labels = [r"$%.1f$" % xtick for xtick in xticks]
-for i in xrange(len(xticks)):
+for i in range(len(xticks)):
 	if xticks[i] >= 10.:
 		xtick_labels[i] = r"$%i$" % xticks[i]
 ax1.set_xticks(xticks)

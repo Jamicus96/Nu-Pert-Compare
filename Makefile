@@ -4,7 +4,7 @@ CFlags=-c -Wall -O3 -pedantic -MMD -std=c++11 -Werror
 CFlags+=-ffast-math
 
 Sources=$(wildcard src/*.cpp)
-IncludeDir=-I./include
+IncludeDir=-I./include -I/opt/homebrew/Cellar/eigen/3.4.0_1/include/
 AllObjects=$(addprefix obj/,$(notdir $(Sources:.cpp=.o)))
 Executables=main
 Objects=$(filter-out $(addprefix obj/,$(Executables:=.o)),$(AllObjects))

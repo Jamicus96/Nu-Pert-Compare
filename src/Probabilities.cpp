@@ -18,6 +18,7 @@
 #include "AKT.h"
 #include "DPZ.h"
 #include "OS.h"
+#include "JP.h"
 
 double Pmue(double a, double L, double E, expression m)
 {
@@ -43,6 +44,7 @@ double Pmue(double a, double L, double E, expression m)
 		case dpz2:		return DPZ::Pmue(a, L, E, 2);
 		case os:		return OS::Pmue(a, L, E);
 		case Exp:		return OS::Pmue2(a, L, E);
+		case jp:		return JP::Pmue(a, L, E);
 
 		default: throw std::domain_error("Model referenced not declared in Pmue(..., expression)");
 	} // switch expression
@@ -72,6 +74,7 @@ std::string Name(expression m)
 		case dpz2:		return "DPZ^2";
 		case os:		return "OS";
 		case Exp:		return "Exp";
+		case jp:		return "JP";
 
 		default: throw std::domain_error("Model referenced not declared in Name(expression)");
 	} // switch m

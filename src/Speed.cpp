@@ -87,6 +87,7 @@ void Speed()
 	Write(akt, 5e3, P_exact, data);
 	Write(dpz0, 5e3, P_exact, data);
 	Write(dpz2, 5e3, P_exact, data);
+	Write(jp, 5e3, P_exact, data);
 
 	delta = 0;
 	Recalc_Parameters();
