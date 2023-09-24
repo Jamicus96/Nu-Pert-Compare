@@ -1,9 +1,11 @@
 #include <cmath>
 #include <chrono>
 #include <fstream>
+#include <vector>
 
 #include "Speed.h"
 #include "Probabilities.h"
+#include "JP.h"
 #include "Parameters.h"
 #include "Peak.h"
 
@@ -33,22 +35,49 @@ double Speed(expression m, int n)
 	} // i, n
 
 	// begin timing loop
-	std::chrono::high_resolution_clock::time_point start_time = std::chrono::high_resolution_clock::now();
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < n; j++)
+	if (m == jp) {
+		std::vector<double> P;
+		std::vector<double> E;
+		std::vector<double> L;
+		std::vector<double> a;
+		for (int i = 0; i < n; i++)
 		{
-			a = 1.5 * Es[j] * YerhoE2a;
-			Pmue(a, Ls[i], Es[j], m);
-		} // j, n, E
-	} // i, n, L
-	std::chrono::high_resolution_clock::time_point end_time = std::chrono::high_resolution_clock::now();
+			for (int j = 0; j < n; j++)
+			{
+				P.push_back(0.0);
+				E.push_back(Es[j]);
+				L.push_back(Ls[i]);
+				a.push_back(1.5 * Es[j] * YerhoE2a);
+			} // j, n, E
+		} // i, n, L
+		std::chrono::high_resolution_clock::time_point start_time = std::chrono::high_resolution_clock::now();
+		JP::Pmue(a, L, E, P);
+		std::chrono::high_resolution_clock::time_point end_time = std::chrono::high_resolution_clock::now();
 
-	// clean up
-	delete[] Ls;
-	delete[] Es;
+		// clean up
+		delete[] Ls;
+		delete[] Es;
 
-	return std::chrono::duration_cast<std::chrono::duration<double>>(end_time - start_time).count() / pow(n, 2);
+		return std::chrono::duration_cast<std::chrono::duration<double>>(end_time - start_time).count() / pow(n, 2);
+
+	} else {
+		std::chrono::high_resolution_clock::time_point start_time = std::chrono::high_resolution_clock::now();
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				a = 1.5 * Es[j] * YerhoE2a;
+				Pmue(a, Ls[i], Es[j], m);
+			} // j, n, E
+		} // i, n, L
+		std::chrono::high_resolution_clock::time_point end_time = std::chrono::high_resolution_clock::now();
+
+		// clean up
+		delete[] Ls;
+		delete[] Es;
+
+		return std::chrono::duration_cast<std::chrono::duration<double>>(end_time - start_time).count() / pow(n, 2);
+	}
 }
 
 void Write(expression m, int n, double P_exact, std::ofstream &data)

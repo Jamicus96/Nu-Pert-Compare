@@ -7,9 +7,9 @@ int main()
 	Recalc_Parameters();
 
 	// Figures
-//	Precision();
-//	Probabilities();
-//	Peak_Precision();
+	Precision();
+	Probabilities();
+	Peak_Precision();
 
 	Speed(); // takes O(few) minutes
 
