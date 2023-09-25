@@ -13,7 +13,10 @@ extern double cd, sd;
 extern double mo_sign;
 extern std::complex<double> eid;
 
+extern double a0_vac, a1_vac, H_ee, Y_ee, R_H_em, I_H_em, R_Y_em, I_Y_em;
+
 void Recalc_Parameters();
+void JP_Prob_Constants();
 
 // unit conversions
 extern double eVsqkm_to_GeV;

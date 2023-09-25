@@ -20,6 +20,8 @@ double cd, sd;
 double mo_sign;
 std::complex<double> eid;
 
+double a0_vac, a1_vac, H_ee, Y_ee, R_H_em, I_H_em, R_Y_em, I_Y_em;
+
 void Recalc_Parameters()
 {
 	c12sq = 1 - s12sq;
@@ -55,6 +57,33 @@ void Recalc_Parameters()
 	eid = exp(std::complex<double>(0, delta));
 
 	mo_sign = Dmsq31 > 0 ? 1 : -1;
+
+	// Extra
+	JP_Prob_Constants();
+}
+
+/**
+ * @brief Computes constants needed for JP function.
+ */
+void JP_Prob_Constants() {
+
+    // Compute vacuum constants common to all flavours
+    a0_vac = (Dmsq21*Dmsq21*Dmsq21 + Dmsq31*Dmsq31*Dmsq31) / 27.0 - (Dmsq21*Dmsq21 * Dmsq31 + Dmsq21 * Dmsq31*Dmsq31) / 18.0;
+    a1_vac = (Dmsq21*Dmsq21 + Dmsq31*Dmsq31 - Dmsq21 * Dmsq31) / 9.0;
+    H_ee = Dmsq21 * (s12*s12 * c13*c13 - 1.0 / 3.0) + Dmsq31 * (s13*s13 - 1.0 / 3.0);
+    Y_ee = (Dmsq21*Dmsq21 * (s12*s12 * c13*c13 - 1.0 / 3.0) + Dmsq31*Dmsq31 * (s13*s13 - 1.0 / 3.0) + 2.0 * Dmsq21 * Dmsq31 * (c12*c12 * c13*c13 - 1.0 / 3.0)) / 3.0;
+
+    // Compute extra mu->e constants
+    R_H_em = Dmsq21 * s12 * c13 * (c12 * c23 - s12 * s23 * s13 * cd) + Dmsq31 * s13 * s23 * c13 * cd;
+    I_H_em = Dmsq21 * s12*s12 * s13 * s23 * c13 * sd - Dmsq31 * s13 * s23 * c13 * sd;
+
+    R_Y_em = (s12 * c13 * (c12 * c23 - s12 * s13 * s23 * cd) * Dmsq21*Dmsq21
+			+ s13 * s23 * c13 * cd * Dmsq31*Dmsq31
+			- 2.0 * c12 * c13 * (s12 * c23 + s13 * s23 * c12 * cd) * Dmsq21 * Dmsq31) / 3.0;
+
+    I_Y_em = (s12*s12 * s13 * s23 * c13 * sd * Dmsq21*Dmsq21
+			- s13 * s23 * c13 * sd * Dmsq31*Dmsq31
+			+ 2.0 * s13 * s23 * c12*c12 * c13 * sd * Dmsq21 * Dmsq31) / 3.0;
 }
 
 double eVsqkm_to_GeV = 1e-9 / 1.97327e-7 * 1e3;
