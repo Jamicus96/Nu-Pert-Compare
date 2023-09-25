@@ -129,6 +129,5 @@ plt.annotate(r"", xy = (1 - dx1, 1 - dx1), xycoords = "axes fraction", xytext = 
 # version number
 plt.text(0.10, 0.01, r"${\rm Nu}$-${\rm Pert}$-${\rm Compare\ v1.2}$", ha = "left", va = "bottom", transform = plt.gca().transAxes, color = "gray", fontsize = 10)
 # save the figure
-# plt.savefig("fig/Speed.pdf")
-plt.show()
+plt.savefig("fig/Speed.pdf")
 
